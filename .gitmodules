@@ -1,0 +1,6 @@
+[submodule "alacritty/alacritty-theme"]
+	path = alacritty/alacritty-theme
+	url = https://github.com/alacritty/alacritty-theme.git
+[submodule "noVNC"]
+	path = noVNC
+	url = https://github.com/novnc/noVNC.git

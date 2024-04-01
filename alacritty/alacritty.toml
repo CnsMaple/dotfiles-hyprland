@@ -1,0 +1,14 @@
+import = ["/home/maple/.config/alacritty/alacritty-theme/themes/hyper.toml"]
+
+[font]
+size = 13
+
+[font.normal]
+family = "Maple Mono SC NF"
+style = "Regular"
+
+[shell]
+program = "fish"
+
+[window]
+opacity = 0.8

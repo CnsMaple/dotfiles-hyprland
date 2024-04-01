@@ -1,0 +1,12 @@
+[Unit]
+Description=My Program Service
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=maple
+ExecStart=/home/maple/dotfiles-hyprland/UdpServer_linux 8888
+
+[Install]
+WantedBy=multi-user.target
