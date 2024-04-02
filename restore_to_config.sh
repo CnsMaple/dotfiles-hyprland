@@ -13,3 +13,4 @@ cp -r ./alacritty ~/.config/
 cp -r ./ags ~/.config/
 
 cp -r ./noVNC ~/.config/
+~/.config/noVNC/utils/novnc_proxy
