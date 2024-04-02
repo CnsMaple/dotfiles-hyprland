@@ -11,6 +11,7 @@ const date = Variable("", {
   poll: [100, 'date "+%Y-%m-%d %H:%M:%S.%3N"'],
 });
 
+
 const cpu = Variable("cpu: error", {
   poll: [
     1000,
@@ -93,7 +94,6 @@ function Clock() {
     label: date.bind(),
   });
 }
-
 
 function Volume() {
   const icons = {
@@ -217,23 +217,37 @@ function Bar(monitor = 0) {
   });
 }
 
-Utils.timeout(100, () => Utils.notify({
-    summary: "Notification Popup Example",
-    iconName: "info-symbolic",
-    body: "Lorem ipsum dolor sit amet, qui minim labore adipisicing "
-        + "minim sint cillum sint consectetur cupidatat.",
-    actions: {
-        "Cool": () => print("pressed Cool"),
+const network = await Service.import("network");
+
+const WifiIndicator = () =>
+  Widget.Box({
+    children: [
+      Widget.Icon({
+        icon: network.wifi.bind("icon_name"),
+      }),
+      Widget.Label({
+        label: network.wifi.bind("ssid").as((ssid) => ssid || "Unknown"),
+      }),
+    ],
+  });
+
+const WiredIndicator = () =>
+  Widget.Icon({
+    icon: network.wired.bind("icon_name"),
+  });
+
+const NetworkIndicator = () =>
+  Widget.Stack({
+    children: {
+      wifi: WifiIndicator(),
+      wired: WiredIndicator(),
     },
-}))
+    shown: network.bind("primary").as((p) => p || "wifi"),
+  });
 
 App.config({
   style: App.configDir + "/style.css",
-  windows: [
-    Bar(),
-    applauncher,
-    NotificationPopups(),
-  ],
+  windows: [Bar(), applauncher, NotificationPopups()],
 });
 
 export {};
