@@ -26,6 +26,8 @@ software_list=(
 
     lxqt-policykit # 图形界面授权管理
 
+    sddm
+
     # 字体和图标
     ttf-maple
     nerd-fonts-sarasa-term
@@ -45,7 +47,7 @@ pacman_packages_install_paru() {
             read -rep $'[\e[1;33mACTION\e[0m] - Would you like to install the paru? (Y,n) ' INST
             if [[ $INST != "N" && $INST != "n" ]]; then
                 echo -e "Installing paru"
-                sudo pacman -S --needed base-devel;
+                sudo pacman -S --noconfirm --needed base-devel;
                 git clone https://aur.archlinux.org/paru.git
                 cd paru
                 makepkg -si --noconfirm
@@ -104,26 +106,6 @@ else
 fi
 
 
-read -rep $'[\e[1;33mACTION\e[0m] - Would you like to enable the services now? (Y,n) ' HYP
-if [[ $HYP != "N" && $HYP != "n" ]]; then
-    echo -e "$CNT - Enabling Services..."
-    echo -e "$CNT - Enabling sshd..."
-    sudo systemctl enable sshd
-    sudo systemctl start sshd
-
-    echo -e "$CNT - Enabling fish_udp_server_linux..."
-    sudo ln -s /home/maple/dotfiles-hyprland/fish_udp_server_linux.service  /etc/systemd/system/fish_udp_server_linux.service
-    sudo systemctl enable fish_udp_server_linux.service
-    sudo systemctl start fish_udp_server_linux.service
-
-    echo -e "$CNT - Enabling sddm..."
-    sudo ln -s /home/maple/dotfiles-hyprland/sddm.conf  /etc/sddm.conf
-    sudo systemctl enable sddm
-    sudo systemctl start sddm
-else
-    exit
-fi
-
 read -rep $'[\e[1;33mACTION\e[0m] - Would you like to copy config files? (Y,n) ' CFG
 if [[ $HYP != "N" && $HYP != "n" ]]; then
     echo -e "$CNT - Copying config files..."
@@ -136,4 +118,28 @@ else
 fi
 
 
-echo -e "$CNT - Script had completed!"
+read -rep $'[\e[1;33mACTION\e[0m] - Would you like to enable the services now? (Y,n) ' HYP
+if [[ $HYP != "N" && $HYP != "n" ]]; then
+    echo -e "$CNT - Enabling Services..."
+    echo -e "$CNT - Enabling sshd..."
+    sudo systemctl enable sshd
+
+    echo -e "$CNT - Enabling fish_udp_server_linux..."
+    sudo ln -s /home/maple/dotfiles-hyprland/fish_udp_server_linux.service  /etc/systemd/system/fish_udp_server_linux.service
+    sudo systemctl enable fish_udp_server_linux.service
+
+    echo -e "$CNT - Enabling sddm..."
+    sudo ln -s /home/maple/dotfiles-hyprland/sddm.conf  /etc/sddm.conf
+    sudo systemctl enable sddm
+else
+    exit
+fi
+
+read -rep $'[\e[1;33mACTION\e[0m] - you need to reboot, would you like to reboot now? (Y,n) ' HYP
+if [[ $HYP != "N" && $HYP != "n" ]]; then
+    echo -e "$CNT - Rebooting..."
+    echo -e "$CNT - Script had completed!"
+    sudo reboot
+else
+    exit
+fi
