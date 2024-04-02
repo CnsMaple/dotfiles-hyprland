@@ -34,6 +34,12 @@ software_list=(
     ttf-apple-emoji
     papirus-icon-theme
 
+    python-numpy # novnc的强化
+
+    libnotify # 手动发送通知
+
+    aylurs-gtk-shell # 比较集成的状态栏
+
     clash-verge-rev-bin # hack: 网络工具，可能会有变化...
 )
 
