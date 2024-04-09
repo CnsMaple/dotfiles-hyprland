@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
 sudo rm -rf ~/.config/hypr
-sudo rm -rf ~/.config/fish
-sudo rm -rf ~/.config/alacritty
-sudo rm -rf ~/.config/ags
-
-sudo rm -rf ~/.config/noVNC
-
 cp -r ./hypr ~/.config/
+
+sudo rm -rf ~/.config/fish
 cp -r ./fish ~/.config/
+
+sudo rm -rf ~/.config/alacritty
 cp -r ./alacritty ~/.config/
+
+sudo rm -rf ~/.config/ags
 cp -r ./ags ~/.config/
 
-cp -r ./noVNC ~/.config/
-~/.config/noVNC/utils/novnc_proxy
+# sudo rm -rf ~/.config/noVNC
+# cp -r ./noVNC ~/.config/
+# ~/.config/noVNC/utils/novnc_proxy

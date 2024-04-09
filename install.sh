@@ -2,7 +2,7 @@
 
 
 software_list=(
-    openssh # 基本的ssh连接
+    openssh # 基本的ssh连接，后面有[ 服务 ]
 
     # 压缩工具
     unzip
@@ -22,11 +22,8 @@ software_list=(
 
     hyprland # 一个好用的桌面环境
 
-    wayvnc # 远程连接必备
 
     lxqt-policykit # 图形界面授权管理
-
-    sddm
 
     # 字体和图标
     ttf-maple
@@ -34,13 +31,20 @@ software_list=(
     ttf-apple-emoji
     papirus-icon-theme
 
-    python-numpy # novnc的强化
 
     libnotify # 手动发送通知
 
     aylurs-gtk-shell # 比较集成的状态栏
 
-    clash-verge-rev-bin # hack: 网络工具，可能会有变化...
+    open-vm-tools # 虚拟机必备，后面有[ 服务 ]
+
+    # sddm # 后面有[ 服务 ]启动
+
+    # wayvnc # 远程连接必备
+
+    # python-numpy # novnc的强化
+
+    # clash-verge-rev-bin # hack: 网络工具，可能会有变化...
 )
 
 
@@ -130,13 +134,17 @@ if [[ $HYP != "N" && $HYP != "n" ]]; then
     echo -e "$CNT - Enabling sshd..."
     sudo systemctl enable sshd
 
-    echo -e "$CNT - Enabling fish_udp_server_linux..."
-    sudo ln -s /home/maple/dotfiles-hyprland/fish_udp_server_linux.service  /etc/systemd/system/fish_udp_server_linux.service
-    sudo systemctl enable fish_udp_server_linux.service
+    # echo -e "$CNT - Enabling fish_udp_server_linux..."
+    # sudo ln -s /home/maple/dotfiles-hyprland/fish_udp_server_linux.service  /etc/systemd/system/fish_udp_server_linux.service
+    # sudo systemctl enable fish_udp_server_linux.service
 
-    echo -e "$CNT - Enabling sddm..."
-    sudo ln -s /home/maple/dotfiles-hyprland/sddm.conf  /etc/sddm.conf
-    sudo systemctl enable sddm
+    # echo -e "$CNT - Enabling sddm..."
+    # sudo ln -s /home/maple/dotfiles-hyprland/sddm.conf  /etc/sddm.conf
+    # sudo systemctl enable sddm
+
+    echo -e "$CNT - Enabling vmware services..."
+    sudo systemctl enable vmtoolsd
+    sudo systemctl enable vmware-vmblock-fuse
 else
     exit
 fi
